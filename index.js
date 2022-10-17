@@ -1,6 +1,5 @@
 let idleSprite
-// let leftSprite
-// let rightSprite
+let gameOver = false
 
 function preload() {
   idleSprite = loadImage('idle-sprite.png')
@@ -22,18 +21,6 @@ function setup() {
     idleFrames[i] = idleSprite.get(i * imgSize, 0, imgSize, imgSize)
   }
 
-  // // Load left sprite
-  // let leftFrames = []
-  // for (let i = 0; i < numImgs; i++) {
-  //   leftFrames[i] = leftSprite.get(i * imgSize, 0, imgSize, imgSize)
-  // }
-
-  // // Load right sprite 
-  // let rightFrames = []
-  // for (let i = 0; i < numImgs; i++) {
-  //   rightFrames[i] = rightSprite.get(i * imgSize, 0, imgSize, imgSize)
-  // }
-
   xStart = 600
   yStart = 400
   player = new PlayerSprite(idleFrames, xStart, yStart, imgSize)
@@ -41,10 +28,17 @@ function setup() {
 
 // Draw function is continuously called
 function draw() {
-  background(255)
-  player.render()
-  player.animate()
-  handleMove()
+  if (!gameOver) {
+    background(255)
+    player.render()
+    player.animate()
+    handleMove()
+    checkDeath()
+  } else {
+    background(150)
+    textSize(32);
+    text('you died...', 10, 30);
+  }
 }
 
 function handleMove() {
@@ -60,5 +54,11 @@ function handleMove() {
   }
   if (keyIsDown(DOWN_ARROW) && player.pos.y < 600) {
     player.move(0, 15)
+  }
+}
+
+function checkDeath() {
+  if (player.pos.y < 0) {
+    gameOver = true
   }
 }
