@@ -6,6 +6,7 @@ class PlayerSprite {
       this.pos = createVector(x, y)
       this.vel = createVector(0, 0)
       this.acc = createVector(0, 0)
+      // this.friction = 0.5
     }
     
     render() {
@@ -13,7 +14,11 @@ class PlayerSprite {
     }
     
     animate() {
-      this.frameInd = (this.frameInd + 1) % this.idleFrames.length
+      if (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW) || keyIsDown(UP_ARROW) || keyIsDown(DOWN_ARROW)) {
+        this.frameInd = (this.frameInd + 1) % this.idleFrames.length
+      } else {
+        this.frameInd = 0
+      }
     }
 
     move(x, y) {

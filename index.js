@@ -1,21 +1,42 @@
 let idleSprite
+// let leftSprite
+// let rightSprite
 
 function preload() {
-  idleSprite = loadImage('hotdog-sprite.png')
+  idleSprite = loadImage('idle-sprite.png')
+  // leftSprite = loadImage('left-sprite.png')
+  // rightSprite = loadImage('right-sprite.png')
 }
 
 function setup() {
   createCanvas(1280, 720)
-  frameRate(15)
+  frameRate(20)
   
   // Load in sprite images
-  let idleFrames = []
-  let numImgs = 5
+  let numImgs = 4
   let imgSize = 100
+  
+  // Load idle sprite 
+  let idleFrames = []
   for (let i = 0; i < numImgs; i++) {
     idleFrames[i] = idleSprite.get(i * imgSize, 0, imgSize, imgSize)
   }
-  player = new PlayerSprite(idleFrames, width/2 - 100, height/2 - 100, imgSize)
+
+  // // Load left sprite
+  // let leftFrames = []
+  // for (let i = 0; i < numImgs; i++) {
+  //   leftFrames[i] = leftSprite.get(i * imgSize, 0, imgSize, imgSize)
+  // }
+
+  // // Load right sprite 
+  // let rightFrames = []
+  // for (let i = 0; i < numImgs; i++) {
+  //   rightFrames[i] = rightSprite.get(i * imgSize, 0, imgSize, imgSize)
+  // }
+
+  xStart = 600
+  yStart = 400
+  player = new PlayerSprite(idleFrames, xStart, yStart, imgSize)
 }
 
 // Draw function is continuously called
