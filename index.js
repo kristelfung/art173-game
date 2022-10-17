@@ -2,7 +2,7 @@ let idleSprite
 let coinSprite
 let gameOver = false
 let score = 0
-let timeNumber = 10
+let timer = 30
 
 function preload() {
   idleSprite = loadImage('idle-sprite.png')
@@ -35,22 +35,36 @@ function setup() {
 function draw() {
   if (!gameOver) {
     background(255)
+
+    fill(0, 0, 0)
     textSize(32);
     text('score: ' + score, 10, 30)
+    
+    if (timer <= 5) {
+      fill(255, 0, 0)
+    } else {
+      fill(0, 0, 0)
+    }
     textSize(32)
-    text('time left: ' + timeNumber, 400, 30)
+    text('time left: ' + timer, 400, 30)
+
     player.render()
     player.animate()
     coin.render()
     if (coin.checkCollision(player)) {
       score += 1
     }
+    countdown()
     handleMove()
     checkDeath()
   } else {
     background(150)
+
+    fill(0, 0, 0)
     textSize(32);
-    text('you died...', 10, 30);
+    text('game over!', 10, 30);
+    text('score: ' + score, 10, 70)
+    
   }
 }
 
@@ -69,8 +83,15 @@ function handleMove() {
   }
 }
 
+function countdown() {
+  if (frameCount % 20 == 0 && timer > 0) {
+    timer -= 1
+    console.log(timer)
+  }
+}
+
 function checkDeath() {
-  if (player.pos.y < 0) {
+  if (timer == 0) {
     gameOver = true
   }
 }
