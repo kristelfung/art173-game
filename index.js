@@ -4,7 +4,7 @@ let enemySprite
 let enemies = [null, null, null]
 let gameOver = false
 let score = 0
-let timer = 30
+let timer = 20
 
 function preload() {
   idleSprite = loadImage('idle-sprite.png')

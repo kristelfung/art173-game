@@ -19,13 +19,13 @@ class EnemySprite {
 
   move() {
     if (this.spawnPoint === 'top') { // Go to bottom
-      this.vel = createVector(0, 10)
+      this.vel = createVector(Math.random() * 7, 12)
     } else if (this.spawnPoint === 'bottom') { // Go to top
-      this.vel = createVector(0, -10)
+      this.vel = createVector(Math.random() * 7, -12)
     } else if (this.spawnPoint === 'left') { // Go to right
-      this.vel = createVector(10, 0)
+      this.vel = createVector(12, Math.random() * 7)
     } else { // this.spawnPoint === 'right,  Go to left
-      this.vel = createVector(-10, 0)
+      this.vel = createVector(-12, Math.random() * 7)
     }
     this.pos.add(this.vel)
   }
@@ -70,7 +70,7 @@ class EnemySprite {
 
   checkCollision(player) {
     const d = this.pos.dist(player.pos)
-    if (d < this.size/2) { // Small correction, as our sprite has padding
+    if (d < this.size/2) {
       return true
     }
     return false
