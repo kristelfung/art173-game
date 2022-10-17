@@ -1,4 +1,4 @@
-- Generate coin in Q4 (not same place every time)
 - Button to start game
 - Button to "play again"
-- Timeout between each enemy generated
+- Ding noise when obtaining coin
+- OOF noise when dying

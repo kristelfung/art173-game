@@ -1,13 +1,15 @@
 const STARTING_SCORE = 0
 const STARTING_TIMER = 20
 
+const TOTAL_ENEMIES = 5
+
 class Game {
   constructor(playerSprite, coinSprite, enemySprite) {
     this.playerSprite = playerSprite
     this.coinSprite = coinSprite
     this.enemySprite = enemySprite 
 
-    this.enemies = [null, null, null]
+    this.enemies = [null * TOTAL_ENEMIES]
     this.player = null
     this.coin = null
     this.gameOver = null
@@ -46,7 +48,7 @@ class Game {
   }
 
   _initEnemies() {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < TOTAL_ENEMIES; i++) {
       this.enemies[i] = this._generateOneEnemy()
     }
   }
@@ -75,7 +77,7 @@ class Game {
     }
 
     // Enemies
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < TOTAL_ENEMIES; i++) {
       this.enemies[i].render()
       this.enemies[i].animate()
       this.enemies[i].move()
@@ -113,7 +115,7 @@ class Game {
   }
 
   checkEnemies() {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < TOTAL_ENEMIES; i++) {
       if (this.enemies[i].outOfBounds()){
         this.enemies[i].spawn()
       }
