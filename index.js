@@ -48,16 +48,17 @@ function draw() {
 }
 
 function handleMove() {
-  if (keyIsDown(LEFT_ARROW)) {
+  if (keyIsDown(LEFT_ARROW) && player.pos.x > 0) {
     player.move(-15, 0)
   }
-  if (keyIsDown(RIGHT_ARROW)) {
+  console.log(player.pos.y)
+  if (keyIsDown(RIGHT_ARROW) && player.pos.x < 1280 - 100) {
     player.move(15, 0)
   }
-  if (keyIsDown(UP_ARROW)) {
+  if (keyIsDown(UP_ARROW) && player.pos.y > 0) {
     player.move(0, -15)
   }
-  if (keyIsDown(DOWN_ARROW)) {
+  if (keyIsDown(DOWN_ARROW) && player.pos.y < 600) {
     player.move(0, 15)
   }
 }
