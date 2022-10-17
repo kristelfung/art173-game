@@ -11,7 +11,7 @@ class CoinSprite {
 
   checkCollision(player) {
     const d = this.pos.dist(player.pos)
-    if (d < this.size + player.size / 2) {
+    if (d < this.size + (player.size / 2) - 10) { // Small correction, as our sprite has padding
       this._respawnCoin(player)
       return true
     }
