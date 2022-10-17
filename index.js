@@ -2,6 +2,7 @@ let idleSprite
 let coinSprite
 let gameOver = false
 let score = 0
+let timeNumber = 10
 
 function preload() {
   idleSprite = loadImage('idle-sprite.png')
@@ -35,10 +36,15 @@ function draw() {
   if (!gameOver) {
     background(255)
     textSize(32);
-    text('score: ' + score, 20, 40)
+    text('score: ' + score, 10, 30)
+    textSize(32)
+    text('time left: ' + timeNumber, 400, 30)
     player.render()
     player.animate()
     coin.render()
+    if (coin.checkCollision(player)) {
+      score += 1
+    }
     handleMove()
     checkDeath()
   } else {
