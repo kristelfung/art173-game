@@ -39,6 +39,6 @@ function draw() {
     fill(0, 0, 0)
     textSize(32);
     text('game over!', 10, 30);
-    text('score: ' + score, 10, 70)
+    text('score: ' + game.getScore(), 10, 70)
   }
 }

@@ -1,3 +1,6 @@
+const STARTING_SCORE = 0
+const STARTING_TIMER = 20
+
 class Game {
   constructor(playerSprite, coinSprite, enemySprite) {
     this.playerSprite = playerSprite
@@ -18,8 +21,8 @@ class Game {
     this._initEnemies()
 
     this.gameOver = false
-    this.score = 0 // TODO: make global constant later
-    this.timer = 20
+    this.score = STARTING_SCORE
+    this.timer = STARTING_TIMER
   }
 
   _initPlayer() {
