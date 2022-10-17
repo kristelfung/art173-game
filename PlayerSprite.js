@@ -6,7 +6,6 @@ class PlayerSprite {
       this.pos = createVector(x, y)
       this.vel = createVector(0, 0)
       this.acc = createVector(0, 0)
-      this.friction = 0.8
     }
     
     render() {
@@ -15,5 +14,13 @@ class PlayerSprite {
     
     animate() {
       this.frameInd = (this.frameInd + 1) % this.idleFrames.length
+    }
+
+    move(x, y) {
+      this.acc.add(x, y)
+      this.vel.add(this.acc)
+      this.pos.add(this.vel)
+      this.acc.mult(0)
+      this.vel.mult(0)
     }
   }

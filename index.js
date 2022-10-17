@@ -23,4 +23,20 @@ function draw() {
   background(255)
   player.render()
   player.animate()
+  handleMove()
+}
+
+function handleMove() {
+  if (keyIsDown(LEFT_ARROW)) {
+    player.move(-15, 0)
+  }
+  if (keyIsDown(RIGHT_ARROW)) {
+    player.move(15, 0)
+  }
+  if (keyIsDown(UP_ARROW)) {
+    player.move(0, -15)
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    player.move(0, 15)
+  }
 }
