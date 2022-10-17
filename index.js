@@ -1,6 +1,7 @@
 let idleSprite
 let coinSprite
 let gameOver = false
+let score = 0
 
 function preload() {
   idleSprite = loadImage('idle-sprite.png')
@@ -33,6 +34,8 @@ function setup() {
 function draw() {
   if (!gameOver) {
     background(255)
+    textSize(32);
+    text('score: ' + score, 20, 40)
     player.render()
     player.animate()
     coin.render()
