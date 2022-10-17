@@ -1,6 +1,7 @@
 let idleSprite
 let coinSprite
 let enemySprite
+let enemies = [null, null, null]
 let gameOver = false
 let score = 0
 let timer = 30
@@ -32,33 +33,7 @@ function setup() {
   coin = new CoinSprite(coinSprite, coinX, coinY, coinSize)
 
   // Create first enemy here
-  let numEnemyImgs = 4
-  let enemySize = 100
-  enemyFrames = []
-
-  let enemyX
-  let enemyY
-  let side = ['top', 'bottom', 'left', 'right']
-  randInd = Math.floor(Math.random() * side.length)
-  if (side[randInd] === 'top') {
-    enemyX = Math.random() * 600
-    enemyY = -100
-  } else if (side[randInd] === 'bottom') {
-    enemyX = Math.random() * 600
-    enemyY = 600
-  } else if (side[randInd] === 'left') {
-    enemyX = -100
-    enemyY = Math.random() * 600
-  } else { // 'right
-    enemyX = 600
-    enemyY = Math.random() * 600
-  }
-
-  // Create enemy in specified side
-  for (let i = 0; i < numEnemyImgs; i++) {
-    enemyFrames[i] = enemySprite.get(i * enemySize, 0, enemySize, enemySize)
-  }
-  enemy = new EnemySprite(enemyFrames, enemyX, enemyY, enemySize, side[randInd])
+  generateEnemies(enemies)
 }
 
 // Draw function is continuously called
@@ -86,13 +61,17 @@ function draw() {
     if (coin.checkCollision(player)) {
       score += 1
     }
-    enemy.render()
-    enemy.animate()
-    enemy.move()
+
+    for (let i = 0; i < 3; i++) {
+      enemies[i].render()
+      enemies[i].animate()
+      enemies[i].move()
+    }
 
     // Game functions
     countdown()
     handleMove()
+    checkEnemies()
     checkDeath()
   } else {
     background(150)
@@ -124,7 +103,31 @@ function countdown() {
   }
 }
 
-function generateNewEnemy() {
+function generateEnemies(enemies) {
+  for (let i = 0; i < 3; i++) {
+    enemies[i] = generateOneEnemy()
+  }
+}
+
+function generateOneEnemy() {
+  let numEnemyImgs = 4
+  let enemySize = 100
+  enemyFrames = []
+
+  // Create enemy in specified side
+  for (let i = 0; i < numEnemyImgs; i++) {
+    enemyFrames[i] = enemySprite.get(i * enemySize, 0, enemySize, enemySize)
+  }
+  return new EnemySprite(enemyFrames, enemySize)
+}
+
+function checkEnemies() {
+  for (let i = 0; i < 3; i++) {
+    if (enemies[i].outOfBounds()){
+      console.log("respawning")
+      enemies[i].spawn()
+    }
+  }
 }
 
 function checkDeath() {
