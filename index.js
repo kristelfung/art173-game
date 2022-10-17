@@ -54,18 +54,24 @@ function draw() {
     textSize(32)
     text('time left: ' + timer, 400, 30)
 
-    // Player, coin, and enemy
+    // Player
     player.render()
     player.animate()
+
+    // Coin
     coin.render()
     if (coin.checkCollision(player)) {
       score += 1
     }
 
+    // Enemies
     for (let i = 0; i < 3; i++) {
       enemies[i].render()
       enemies[i].animate()
       enemies[i].move()
+      if (enemies[i].checkCollision(player)) {
+        gameOver = true
+      }
     }
 
     // Game functions
@@ -124,7 +130,6 @@ function generateOneEnemy() {
 function checkEnemies() {
   for (let i = 0; i < 3; i++) {
     if (enemies[i].outOfBounds()){
-      console.log("respawning")
       enemies[i].spawn()
     }
   }

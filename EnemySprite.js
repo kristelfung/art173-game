@@ -61,10 +61,18 @@ class EnemySprite {
     } else if (side[randInd] === 'left') {
       enemyX = -100
       enemyY = Math.random() * 600
-    } else { // 'right
+    } else { // right
       enemyX = 600
       enemyY = Math.random() * 600
     }
     this.pos = createVector(enemyX, enemyY)
+  }
+
+  checkCollision(player) {
+    const d = this.pos.dist(player.pos)
+    if (d < this.size/2) { // Small correction, as our sprite has padding
+      return true
+    }
+    return false
   }
 }
