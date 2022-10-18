@@ -4,6 +4,7 @@ let enemySprite = null
 
 let game = null
 let startButton = null
+let playAgainButton = null
 
 function preload() {
   playerSprite = loadImage('player-sprite.png')
@@ -19,9 +20,9 @@ function setup() {
   textSize(32)
   text('blob: a game', 150, 200)
   startButton = createStartButton()
+  playAgainButton = createPlayAgainButton()
+  playAgainButton.hide()
   noLoop()
-  // game = new Game(playerSprite, coinSprite, enemySprite)
-  // game.init()
 }
 
 // Draw function is continuously called
@@ -46,6 +47,8 @@ function draw() {
     textSize(32);
     text('game over!', 10, 30);
     text('score: ' + game.getScore(), 10, 70)
+    playAgainButton.show()
+    noLoop()
   }
 }
 
@@ -55,9 +58,16 @@ function createStartButton() {
   return button
 }
 
+function createPlayAgainButton() {
+  const button = createButton('play again')
+  button.mousePressed(startGame)
+  return button
+}
+
 function startGame() {
   game = new Game(playerSprite, coinSprite, enemySprite)
   game.init()
   startButton.hide()
+  playAgainButton.hide()
   loop()
 }
