@@ -4,10 +4,12 @@ const STARTING_TIMER = 20
 const TOTAL_ENEMIES = 5
 
 class Game {
-  constructor(playerSprite, coinSprite, enemySprite) {
+  constructor(playerSprite, coinSprite, enemySprite, coinSound, dieSound) {
     this.playerSprite = playerSprite
     this.coinSprite = coinSprite
-    this.enemySprite = enemySprite 
+    this.enemySprite = enemySprite
+    this.coinSound = coinSound
+    this.dieSound = dieSound
 
     this.enemies = [null * TOTAL_ENEMIES]
     this.player = null
@@ -73,6 +75,7 @@ class Game {
     // Coin
     this.coin.render()
     if (this.coin.checkCollision(this.player)) {
+      this.coinSound.play()
       this.score += 1
     }
 
@@ -82,6 +85,7 @@ class Game {
       this.enemies[i].animate()
       this.enemies[i].move()
       if (this.enemies[i].checkCollision(this.player)) {
+        this.dieSound.play()
         this.gameOver = true
       }
     }

@@ -1,6 +1,8 @@
 let idleSprite = null
 let coinSprite = null
 let enemySprite = null
+let coinSound = null
+let dieSound = null
 
 let game = null
 let startButton = null
@@ -10,6 +12,8 @@ function preload() {
   playerSprite = loadImage('player-sprite.png')
   coinSprite = loadImage('coin.png')
   enemySprite = loadImage('enemy-sprite.png')
+  coinSound = loadSound('coin.wav')
+  dieSound = loadSound('oof.wav')
 }
 
 function setup() {
@@ -65,7 +69,7 @@ function createPlayAgainButton() {
 }
 
 function startGame() {
-  game = new Game(playerSprite, coinSprite, enemySprite)
+  game = new Game(playerSprite, coinSprite, enemySprite, coinSound, dieSound)
   game.init()
   startButton.hide()
   playAgainButton.hide()
