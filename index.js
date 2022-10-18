@@ -1,8 +1,9 @@
-let idleSprite
-let coinSprite
-let enemySprite
+let idleSprite = null
+let coinSprite = null
+let enemySprite = null
 
-let game
+let game = null
+let startButton = null
 
 function preload() {
   playerSprite = loadImage('player-sprite.png')
@@ -13,14 +14,19 @@ function preload() {
 function setup() {
   createCanvas(600, 600)
   frameRate(20)
-
-  game = new Game(playerSprite, coinSprite, enemySprite)
-  game.init()
+  background(255)
+  fill(0, 0, 0)
+  textSize(32)
+  text('blob: a game', 150, 200)
+  startButton = createStartButton()
+  noLoop()
+  // game = new Game(playerSprite, coinSprite, enemySprite)
+  // game.init()
 }
 
 // Draw function is continuously called
 function draw() {
-  if (!game.isOver()) {
+  if (game != null && !game.isOver()) {
     background(255)
     // Timer and score
     fill(0, 0, 0)
@@ -34,11 +40,24 @@ function draw() {
     textSize(32)
     text('time left: ' + game.getTimer(), 400, 30)
     game.updateStates()
-  } else {
+  } else if (game != null && game.isOver()) {
     background(150)
     fill(0, 0, 0)
     textSize(32);
     text('game over!', 10, 30);
     text('score: ' + game.getScore(), 10, 70)
   }
+}
+
+function createStartButton() {
+  const button = createButton('start')
+  button.mousePressed(startGame)
+  return button
+}
+
+function startGame() {
+  game = new Game(playerSprite, coinSprite, enemySprite)
+  game.init()
+  startButton.hide()
+  loop()
 }
