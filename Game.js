@@ -33,7 +33,7 @@ class Game {
     let playerSize = 100
     let playerFrames = []
     for (let i = 0; i < numPlayerImgs; i++) {
-      playerFrames[i] = playerSprite.get(i * playerSize, 0, playerSize, playerSize)
+      playerFrames[i] = this.playerSprite.get(i * playerSize, 0, playerSize, playerSize)
     }
     let playerX = 100
     let playerY = 100
@@ -44,7 +44,7 @@ class Game {
     let coinSize = 50
     let coinX = 400
     let coinY = 400
-    this.coin = new CoinSprite(coinSprite, coinX, coinY, coinSize)
+    this.coin = new CoinSprite(this.coinSprite, coinX, coinY, coinSize)
   }
 
   _initEnemies() {
@@ -60,7 +60,7 @@ class Game {
 
     // Create enemy in specified side
     for (let i = 0; i < numEnemyImgs; i++) {
-      enemyFrames[i] = enemySprite.get(i * enemySize, 0, enemySize, enemySize)
+      enemyFrames[i] = this.enemySprite.get(i * enemySize, 0, enemySize, enemySize)
     }
     return new EnemySprite(enemyFrames, enemySize)
   }
@@ -109,7 +109,7 @@ class Game {
     if (keyIsDown(UP_ARROW) && this.player.pos.y > 0) {
       this.player.move(0, -15)
     }
-    if (keyIsDown(DOWN_ARROW) && this.player.pos.y < 500) {
+    if (keyIsDown(DOWN_ARROW) && this.player.pos.y < 520) {
       this.player.move(0, 15)
     }
   }
